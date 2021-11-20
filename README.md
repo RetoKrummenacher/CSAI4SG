@@ -1,6 +1,6 @@
 # Analysis of traffic intensity and car park usage in Basel since 2019
 
-Project in course of the seminar CSA4SG, Fall 2021, University of Basel
+Project in course of the seminar CSAI4SG, Fall 2021, University of Basel
 
 michellej.boesiger@stud.unibas.ch   
 erind.shima@stud.unibas.ch   
@@ -22,7 +22,7 @@ We use Python in [Miniconda](https://docs.conda.io/en/latest/miniconda.html#) du
     - ```conda create -n osmnx --strict-channel-priority osmnx jupyterlab```     
     Note that jupyterlab needs to be included in that command, as this won't be added to your new *osmnx* environment by default unlike the other packages in your *base* environment installed above.
 4. Activate *osmnx* environment: ```conda activate osmnx```. If you did not install the necessary packages, continue with step 2.
-5. Start Jupyter Notebook: ```jupyter notebook```
-6. For rendering the HTML map in Firefox Browser to create an PNG image download (Gecko driver)[https://github.com/mozilla/geckodriver/releases]
+5. Start Jupyter Notebook from the minicoda terminal: ```jupyter notebook```
+6. For rendering the HTML map in Firefox Browser to create an PNG image download [Gecko driver](https://github.com/mozilla/geckodriver/releases)
 
 
