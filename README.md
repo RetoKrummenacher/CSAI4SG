@@ -25,4 +25,3 @@ We use Python in [Miniconda](https://docs.conda.io/en/latest/miniconda.html#) du
 5. Start Jupyter Notebook from the minicoda terminal: ```jupyter notebook```
 6. For rendering the HTML map in Firefox Browser to create an PNG image download [Gecko driver](https://github.com/mozilla/geckodriver/releases)
 
-
