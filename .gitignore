@@ -2,5 +2,6 @@
 
 
 # population as to large
-project/data/
+project/data/*
+!/project/data/*.zip
  
