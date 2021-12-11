@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a4562fbb30014f0eae495de4c7ce42e6 {
+                    position: relative;
+                    width: 975.0px;
+                    height: 575.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_a4562fbb30014f0eae495de4c7ce42e6" ></div>
+        
+</body>
+<script>    
+    
+            var map_a4562fbb30014f0eae495de4c7ce42e6 = L.map(
+                "map_a4562fbb30014f0eae495de4c7ce42e6",
+                {
+                    center: [47.558185919436056, 7.594431431566805],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 14,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b69990bd61f74420af2ef824517f77ba = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            var circle_marker_3e685124de1a462cbd80a2a7e87d2f83 = L.circleMarker(
+                [47.5504299, 7.5943046],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_3e685124de1a462cbd80a2a7e87d2f83.bindTooltip(
+                `<div>
+                     Aeschen
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_08a972156d514cdc81e275d408f9ed04 = L.circleMarker(
+                [47.5630411, 7.5967098],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_08a972156d514cdc81e275d408f9ed04.bindTooltip(
+                `<div>
+                     Europe
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_83b50296b83042dba48cdd0cd2912970 = L.circleMarker(
+                [47.5639644, 7.5946604],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_83b50296b83042dba48cdd0cd2912970.bindTooltip(
+                `<div>
+                     Claramatte
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_72e3609f5f9b490e98ec3bdc5f8b67ad = L.circleMarker(
+                [47.5622725, 7.5917937],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_72e3609f5f9b490e98ec3bdc5f8b67ad.bindTooltip(
+                `<div>
+                     Clarahuus
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_178e34c4b9c14d4ea7e4307568b58f7c = L.circleMarker(
+                [47.561101, 7.5824076],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_178e34c4b9c14d4ea7e4307568b58f7c.bindTooltip(
+                `<div>
+                     City
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4e9f28f813c8490085da9e79f1994217 = L.circleMarker(
+                [47.5592347, 7.58658],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_4e9f28f813c8490085da9e79f1994217.bindTooltip(
+                `<div>
+                     Storchen
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_07cf289fcb9f45a0ad19c07e59e90b56 = L.circleMarker(
+                [47.5515968, 7.593512],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_07cf289fcb9f45a0ad19c07e59e90b56.bindTooltip(
+                `<div>
+                     Anfos
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_1e14276f762b49b2a9fe8b2afa038592 = L.circleMarker(
+                [47.5458851, 7.5884556],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_1e14276f762b49b2a9fe8b2afa038592.bindTooltip(
+                `<div>
+                     Bahnhof Süd
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2dd0cc492f0a451a935bb3c5689dcc03 = L.circleMarker(
+                [47.5651794, 7.6089067],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_2dd0cc492f0a451a935bb3c5689dcc03.bindTooltip(
+                `<div>
+                     Bad. Bahnhof
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4dc290059a49425482d000a02e55903a = L.circleMarker(
+                [47.563241, 7.602175],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_4dc290059a49425482d000a02e55903a.bindTooltip(
+                `<div>
+                     Messe
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_dd2e6238d6174892afc702b5810f3499 = L.circleMarker(
+                [47.5607142, 7.594263],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_dd2e6238d6174892afc702b5810f3499.bindTooltip(
+                `<div>
+                     Rebgasse
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_9a1fc528b99f4af9933e871ae5c6b220 = L.circleMarker(
+                [47.5506254, 7.5874932],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_9a1fc528b99f4af9933e871ae5c6b220.bindTooltip(
+                `<div>
+                     Elisabethen
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e1fcf5b720934a4db6b14cb999726c19 = L.circleMarker(
+                [47.5468617, 7.5929374],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_e1fcf5b720934a4db6b14cb999726c19.bindTooltip(
+                `<div>
+                     Post Basel
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_93e1471c8d5149678f5202470bdb6cb0 = L.circleMarker(
+                [47.547299, 7.5922975],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_93e1471c8d5149678f5202470bdb6cb0.bindTooltip(
+                `<div>
+                     Centralbahnparking
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ad921dca70c246b1b1161320daab35ae = L.circleMarker(
+                [47.5524554, 7.5858936],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_ad921dca70c246b1b1161320daab35ae.bindTooltip(
+                `<div>
+                     Steinen
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_68055a27b9c04e2690c196de249402d8 = L.circleMarker(
+                [47.5751385212, 7.56315796773],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_68055a27b9c04e2690c196de249402d8.bindTooltip(
+                `<div>
+                     A3-A35, Grenze CH-F
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_5ea171f8a28649678bbac837063573d5 = L.circleMarker(
+                [47.5707346457, 7.58226721123],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_5ea171f8a28649678bbac837063573d5.bindTooltip(
+                `<div>
+                     Dreirosenbrücke lokal
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_affdcf5b5e134825b25d0a34319689c4 = L.circleMarker(
+                [47.5656137668, 7.58805266441],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_affdcf5b5e134825b25d0a34319689c4.bindTooltip(
+                `<div>
+                     Johanniterbrücke
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_75b35387fbea4425b6cee62e8e960122 = L.circleMarker(
+                [47.5582014188, 7.59753472493],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_75b35387fbea4425b6cee62e8e960122.bindTooltip(
+                `<div>
+                     Wettsteinbrücke
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_29baa6fd248341a3bbaa0be02a8080f3 = L.circleMarker(
+                [47.5699125893, 7.57284015165],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_29baa6fd248341a3bbaa0be02a8080f3.bindTooltip(
+                `<div>
+                     Luzernerring-Brücke
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_020ea114677449b1ad1394bab3097a9b = L.circleMarker(
+                [47.5771259757, 7.59655916981],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_020ea114677449b1ad1394bab3097a9b.bindTooltip(
+                `<div>
+                     Hochbergerstrasse 55
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_fe1cc70147a44016b939cbab780b2487 = L.circleMarker(
+                [47.5520832984, 7.58677034361],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_fe1cc70147a44016b939cbab780b2487.bindTooltip(
+                `<div>
+                     Heuwaage-Viadukt
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4a812c92d5ac4c359b3e2e983e6eb17a = L.circleMarker(
+                [47.5499027851, 7.58292410405],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_4a812c92d5ac4c359b3e2e983e6eb17a.bindTooltip(
+                `<div>
+                     Viaduktstrasse 60
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c89d04599bba42aca1faa409552d1153 = L.circleMarker(
+                [47.5441806077, 7.57712039374],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_c89d04599bba42aca1faa409552d1153.bindTooltip(
+                `<div>
+                     Dorenbachviadukt
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_451ad34fb36c497da3c39ae0b565f9cd = L.circleMarker(
+                [47.5621767136, 7.56405911184],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_451ad34fb36c497da3c39ae0b565f9cd.bindTooltip(
+                `<div>
+                     Wasgenring 62
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7367a987b5104bfd8e52c901da52f0fc = L.circleMarker(
+                [47.5722888439, 7.6239861801],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_7367a987b5104bfd8e52c901da52f0fc.bindTooltip(
+                `<div>
+                     Äussere Baselstrasse 381
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_9d9d2d5cf8bc4ad59e3a1649f9e77988 = L.circleMarker(
+                [47.5704032206, 7.62857136599],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_9d9d2d5cf8bc4ad59e3a1649f9e77988.bindTooltip(
+                `<div>
+                     Bäumlihofstrasse
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_269a3dc34a9b40f2b2db6d77f994edd3 = L.circleMarker(
+                [47.5628059399, 7.63010594485],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_269a3dc34a9b40f2b2db6d77f994edd3.bindTooltip(
+                `<div>
+                     Grenzacherstrasse 511
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_00b86ce3c59c4d08898deb02d18f9c23 = L.circleMarker(
+                [47.5527116018, 7.60459281521],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_00b86ce3c59c4d08898deb02d18f9c23.bindTooltip(
+                `<div>
+                     St. Alban-Anlage 72
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f34a0ae4155f4257ac5847ecba535959 = L.circleMarker(
+                [47.5739067576, 7.60221558365],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_f34a0ae4155f4257ac5847ecba535959.bindTooltip(
+                `<div>
+                     Fasanenstrasse
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ed3ef934dca848d1bb75f2bb2d1e2b81 = L.circleMarker(
+                [47.544580317, 7.58621009181],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_ed3ef934dca848d1bb75f2bb2d1e2b81.bindTooltip(
+                `<div>
+                     Dornacherstrasse 49
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2eec9b7981de4eb98be7030b17ee2dbc = L.circleMarker(
+                [47.5427356062, 7.58499570186],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_2eec9b7981de4eb98be7030b17ee2dbc.bindTooltip(
+                `<div>
+                     Gundeldingerstrasse 107
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f89558bbeffd484fa6d8388eb08c4ff2 = L.circleMarker(
+                [47.5381329483, 7.59973013355],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_f89558bbeffd484fa6d8388eb08c4ff2.bindTooltip(
+                `<div>
+                     Gundeldingerstrasse 428
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_54af54ddd0ef404e8699dd0e5aaab1d3 = L.circleMarker(
+                [47.5451875415, 7.6017439017],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_54af54ddd0ef404e8699dd0e5aaab1d3.bindTooltip(
+                `<div>
+                     Grosspeterstrasse 45
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_45af320721cb4c9e948bb25f0b3e23e3 = L.circleMarker(
+                [47.5454597631, 7.59957932935],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_45af320721cb4c9e948bb25f0b3e23e3.bindTooltip(
+                `<div>
+                     J. Burckhardt-Strasse 85
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e59666ffa07244f2a032fa1ef638be94 = L.circleMarker(
+                [47.5487720165, 7.60074551669],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_e59666ffa07244f2a032fa1ef638be94.bindTooltip(
+                `<div>
+                     Sevogelstrasse 82
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f7bb57d738d04cf79fa516103737a52e = L.circleMarker(
+                [47.5665568071, 7.59767325247],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_f7bb57d738d04cf79fa516103737a52e.bindTooltip(
+                `<div>
+                     Riehenring 120
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7f72344c4ec14158945b6898d8ced4a7 = L.circleMarker(
+                [47.5463002054, 7.5956105688],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_7f72344c4ec14158945b6898d8ced4a7.bindTooltip(
+                `<div>
+                     Nauenstrasse 73
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_364d34d9bfc44d29a9116a1c951e6ea6 = L.circleMarker(
+                [47.5680940673, 7.57380422434],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_364d34d9bfc44d29a9116a1c951e6ea6.bindTooltip(
+                `<div>
+                     Entenweidstrasse 74
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_fe60fdef87324155b5bda0146401aad3 = L.circleMarker(
+                [47.5676129884, 7.57101717908],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_fe60fdef87324155b5bda0146401aad3.bindTooltip(
+                `<div>
+                     Flughafenstrasse 30
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_0d86369d50384a7aaf9f069047aa92a3 = L.circleMarker(
+                [47.5741246781, 7.57471395015],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_0d86369d50384a7aaf9f069047aa92a3.bindTooltip(
+                `<div>
+                     Elsässerstrasse 146
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b708624d837b43a98902820d33779af8 = L.circleMarker(
+                [47.5768609024, 7.56734174237],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_b708624d837b43a98902820d33779af8.bindTooltip(
+                `<div>
+                     Schlachthofstrasse
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b7d1d9e6c26240d5aa5b839e6ea6f91d = L.circleMarker(
+                [47.5747982039, 7.56235975514],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_b7d1d9e6c26240d5aa5b839e6ea6f91d.bindTooltip(
+                `<div>
+                     Flughafenstrasse
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2669dc5eec414b56ae98dab0f75ec61a = L.circleMarker(
+                [47.5920790511, 7.64377560544],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_a4562fbb30014f0eae495de4c7ce42e6);
+        
+    
+            circle_marker_2669dc5eec414b56ae98dab0f75ec61a.bindTooltip(
+                `<div>
+                     Zoll CH-D, Weilstrasse
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
