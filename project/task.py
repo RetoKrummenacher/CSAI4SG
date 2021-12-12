@@ -27,26 +27,21 @@ def change_site_name(site_name):
     sp = site_name.split(' ',1)
     return sp[1]
 
-def change_park_capacity(name, cap_col, max_free):
-    cap = cap_col
-
-    value = max_free[max_free['name'] == name].reset_index()['Anzahl frei'].iloc[0]
-    if cap < value:
-        cap = value
+def change_park_capacity(entry, name ,d):
+    d_d = d.get('Anzahl frei')
+    value = d_d.get(name)
+    if name != 'Europe' and entry < value:
+        entry = value    
+    return entry
     
-    return cap
-    
-def change_park_free(name, free_col, max_free):
-    free = free_col
-    
-    # europe value, reset index so new one row df has 0 index for iloc[0]
-    value = max_free[max_free['name'] == 'Europe'].reset_index()['Total Plätze'].iloc[0]
-    
+def change_park_free(entry, name, d):
+    d_d = d.get('Total Plätze')
+    value = d_d.get(name)    
     # change europe where its obviously false
-    if name == 'Europe' and free_col > value :
-        free = value           
+    if name == 'Europe' and entry > value :
+        entry = value           
             
-    return free
+    return entry
 
 def plot_dot_park(row, color, map_obj):
     #radius = row.PW / maxPW * 10
@@ -211,8 +206,10 @@ traffic['name'] = traffic['SiteName'].apply(lambda x: change_site_name(x))
 # our solution. set the capacity to the highest value of ever freie platze
 # for cases where there are more freie Plätze then Anzahl
 max_free = pd.DataFrame(park.groupby(['name'])[['Anzahl frei','Total Plätze']].max()).reset_index()
-park['free'] = park.apply(lambda row: change_park_free(row['name'], row['Anzahl frei'], max_free), axis=1)
-park['capacity'] = park.apply(lambda row: change_park_capacity(row['name'], row['Total Plätze'], max_free), axis=1)
+# make dictionary with name as index
+d = max_free.set_index(['name']).to_dict()
+park['free'] = park.apply(lambda row: change_park_free(row['Anzahl frei'], row['name'], d), axis=1)
+park['capacity'] = park.apply(lambda row: change_park_capacity(row['Total Plätze'], row['name'] ,d), axis=1)
 check_max_free = pd.DataFrame(park.groupby(['name'])[['free','capacity']].max()).reset_index()
 
 # utilization
