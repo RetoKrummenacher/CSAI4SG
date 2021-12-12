@@ -20,32 +20,33 @@ import PIL as pil                 # for saving gifs
 import time
 
 
-""" functions
+""" 
+functions
 """
-def change_date(date_string):
-    sp = date_string.split('T')
-    date = sp[0]
-    y = int(date.split('-')[0])
-    month = int(date.split('-')[1])
-    d = int(date.split('-')[2])
-    hour = sp[1].split('+')[0]
-    h = int(hour.split(':')[0]) 
-    m = int(hour.split(':')[1]) 
-    
-    if 30 < m <= 59:
-        m = 0
-        if h == 23:
-            h = 0
-        else:
-            h += 1
-    else:
-        m = 0               
-            
-    return dt.datetime(y, month, d, h, m)
-
 def change_site_name(site_name):
     sp = site_name.split(' ',1)
     return sp[1]
+
+def change_park_capacity(name, cap_col, max_free):
+    cap = cap_col
+
+    value = max_free[max_free['name'] == name].reset_index()['Anzahl frei'].iloc[0]
+    if cap < value:
+        cap = value
+    
+    return cap
+    
+def change_park_free(name, free_col, max_free):
+    free = free_col
+    
+    # europe value, reset index so new one row df has 0 index for iloc[0]
+    value = max_free[max_free['name'] == 'Europe'].reset_index()['Total Plätze'].iloc[0]
+    
+    # change europe where its obviously false
+    if name == 'Europe' and free_col > value :
+        free = value           
+            
+    return free
 
 def plot_dot_park(row, color, map_obj):
     #radius = row.PW / maxPW * 10
@@ -78,6 +79,49 @@ def plot_arrow(cord, angle, color, map_obj):
     
     # add arrow
     folium.Marker(location=cord, icon=icon_arrow).add_to(map_obj)
+    
+def change_date(df, time_col, unique_col, new_col):
+    df = df.copy()  # copy need if changes in dataframe, else just reference
+    # convert date str to utc rounded hours
+    df[new_col] = pd.to_datetime(df[time_col], utc = True)
+    # round on 15 minutes, the get those nearest to full hour
+    df[new_col] = df[new_col].dt.round('15min')
+    # drop duplicates 
+    df = df.drop_duplicates(subset = [new_col, unique_col])
+    # round on full hour
+    df[new_col]  = df[new_col].dt.round('H')    
+    # drop duplicates 
+    df = df.drop_duplicates(subset = [new_col, unique_col])
+    # only use those at full hour
+    return df
+
+def check_on_date(df, df_ori, time_col, time_col_ori, number_per_hour):
+    # check
+    check = pd.DataFrame(df[time_col].value_counts())
+    # all not number_per_hour: e.g 15 parkings
+    print('Rows where value counts not equals ',number_per_hour,':',
+          len(check[check[time_col] != number_per_hour])) # no rows
+    # are all hours in in?
+    # create timestamps over full period of original dataframe
+    end_date = max(pd.to_datetime(df_ori[time_col_ori], utc=True).dt.round('H'))
+    start_date = min(pd.to_datetime(df_ori[time_col_ori], utc=True).dt.round('H'))
+    def daterange(start_date, end_date):
+        delta = dt.timedelta(hours=1)
+        while start_date < end_date:
+            yield start_date
+            start_date += delta
+    
+    all_l = []
+    for single_date in daterange(start_date, end_date):
+        all_l.append(single_date)
+    
+    # check whats missing
+    here_l = list(df[time_col].unique())
+    missing = list(set(all_l).difference(set(here_l)))
+    print(len(missing),'hours are missing in the original set')
+    missing.sort()
+    return (check, missing)
+
         
 # coordinate
 # coordinate
@@ -100,17 +144,13 @@ arrows = [(inter_togb, 40), (inter_tokb, 220), (kb_in, 30), (kb_out,265),
 # cluster list
 clusters = [kb,gb]
     
-def plotter(map_obj):
-    for cord, angle in arrows:
-        
-        # call color function
-        
+def plot_clusters(map_obj):
+    for cord, angle in arrows:       
         plot_arrow(cord, angle, 'red', map_obj)
     
     for cord in clusters:
-        plot_park_cluster(cord, 'blue', map_obj)
-    
-
+        plot_park_cluster(cord, 'blue', map_obj)        
+  
 
 # # path setting for all the scripts
 # sys.path.append(os.path.dirname(__file__))
@@ -126,9 +166,10 @@ park_raw = pd.read_table(os.path.join(parent_path,'data','parcLot.csv'), sep = '
 traffic_cluster = pd.read_table(os.path.join(parent_path,'data','traffic_cluster.csv'), sep = ';', encoding = 'utf-8')
 park_cluster = pd.read_table(os.path.join(parent_path,'data','park_cluster.csv'), sep = ';', encoding = 'utf-8')
 
-""" scrip
-"""
 
+"""
+scrip
+"""
 traffic = traffic_raw.copy()
 park = park_raw.copy()
 
@@ -141,21 +182,41 @@ park.rename(columns={'geo_point_2d': 'geoPoint'}, inplace = True)
 
 # rename the name of the side as we use this in visualization
 park.rename(columns={'Name': 'name'}, inplace = True)
+# names for traffic site
+traffic['name'] = traffic['SiteName'].apply(lambda x: change_site_name(x)) 
 
-# work the row entries for data and geo coordinate
-# python datetime format
-park['date'] = park['Publikationszeit'].apply(lambda x: change_date(x))   
-traffic['date'] = traffic['DateTimeTo'].apply(lambda x: change_date(x))  
+# use function to change date
+park = change_date(park, 'Publikationszeit', 'name', 'date')
+# check dates in park
+value_counts_p, mis_p = check_on_date(park, park_raw, 'date', 'Publikationszeit', 15)
+# some days and hours are missing completely, check mis_p
 
-# geopoints
+# use function to change date
+traffic = change_date(traffic, 'DateTimeTo', 'name', 'date')
+# check dates in traffic, there are 29 unique counting stations
+value_counts_t, mis_t = check_on_date(traffic, traffic_raw, 'date', 'DateTimeTo', 29)
+# many counting stations have not full set, check value_counts_t
+# e.g. aussere Baselstrasse missing for 2019-03-24, 23:00
+
+# change geopoints
 park[['lat','lng']] = park['geoPoint'].str.split(',', expand=True) 
 traffic[['lat','lng']] = traffic['geoPoint'].str.split(',', expand=True) 
 
 # names for traffic site
 traffic['name'] = traffic['SiteName'].apply(lambda x: change_site_name(x)) 
 
+# there are cases where there are more Anzahl frei then Total Plätze
+# it seems the capacity of the parkings is not accurate, as the 
+# freie plätze is given the rrs of the ParkLeitSystem of Basel
+# our solution. set the capacity to the highest value of ever freie platze
+# for cases where there are more freie Plätze then Anzahl
+max_free = pd.DataFrame(park.groupby(['name'])[['Anzahl frei','Total Plätze']].max()).reset_index()
+park['free'] = park.apply(lambda row: change_park_free(row['name'], row['Anzahl frei'], max_free), axis=1)
+park['capacity'] = park.apply(lambda row: change_park_capacity(row['name'], row['Total Plätze'], max_free), axis=1)
+check_max_free = pd.DataFrame(park.groupby(['name'])[['free','capacity']].max()).reset_index()
+
 # utilization
-park['utilization'] = (park['Total Plätze'] - park['Anzahl frei']) / park['Total Plätze']  
+park['utilization'] = (park['capacity'] - park['free']) / park['capacity']  
 
 # average counts over 2019 per day
 # select 2019 data
@@ -177,7 +238,7 @@ park = park.merge(park_cluster[['geoPoint','cluster']], left_on = 'geoPoint', ri
 
 # html for overview:
 # - - - - - - - - -
-# select unique ge koordinates
+# select unique geo koordinates
 u_traffic = traffic[['lat','lng','name', 'average']].drop_duplicates()
 u_park = park[['lat','lng','name','Total Plätze']].drop_duplicates()
 
@@ -191,7 +252,7 @@ m.save("overview.html")
 # html for clustering
 # - - - - - - - - - 
 m = folium.Map(basel, width=975, height =575, zoom_start=14, tiles='CartoDB Positron')
-plotter(m)
+plot_clusters(m)
 m.save("clusters.html")
 
 # create the html for over time for the clusters
@@ -206,20 +267,25 @@ p_cluster = pd.DataFrame(park.groupby(['cluster','date'])
 # calculate utilization
 p_cluster['utilization'] = (p_cluster['Total Plätze'] - p_cluster['Anzahl frei']) / p_cluster['Total Plätze']  
 
-# do the map
-m = folium.Map(basel, width=975, height =575, zoom_start=14, tiles='CartoDB Positron')
 # intersect time span of two dataframe
 time_intersect = list(set(t_cluster['date']).intersection(p_cluster['date']))
 # loop over time
 relevant_time = [x for x in time_intersect if dt.datetime(2020,2,1) <= x < dt.datetime(2020,2,8)]
 relevant_time.sort()
 
-# some seem to miss
-p_rel = p_cluster.loc[(p_cluster['date'] > '2020-02-03 16:00') & (p_cluster['date'] < '2020-02-04 01:00')]
+# # some seem to miss: RKR checked 2021-12-11 an its ok after changing change_date() if clause
+# p_rel = p_cluster.loc[(p_cluster['date'] > '2020-02-03 16:00') & (p_cluster['date'] < '2020-02-04 01:00')]
+# t_rel = t_cluster.loc[(t_cluster['date'] > '2020-02-03 16:00') & (t_cluster['date'] < '2020-02-04 01:00')]
 
-t_rel = t_cluster.loc[(t_cluster['date'] > '2020-02-03 16:00') & (t_cluster['date'] < '2020-02-04 01:00')]
-
-
+for hour in relevant_time():
+    # select data
+    p = p_cluster.loc[(p_cluster['date'] == hour)]
+    t = t_cluster.loc[(t_cluster['date'] == hour)]
+    
+    # do the map
+    m = folium.Map(basel, width=975, height =575, zoom_start=14, tiles='CartoDB Positron')
+    
+    
 
 
 
