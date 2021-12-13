@@ -395,7 +395,7 @@ time_intersect = list(set(t['date']).intersection(p['date']))
 t = t[t['date'].isin(time_intersect)]
 p = p[p['date'].isin(time_intersect)]
 
-window_size = 672
+window_size = 168  # change this to adjust window site (hours, thus 168 = 7 days)
 t_rol = t.rolling(window_size, center = True, on ='date', closed = 'both').mean()
 p_rol = p.rolling(window_size, center = True, on ='date', closed = 'both').mean()
 
