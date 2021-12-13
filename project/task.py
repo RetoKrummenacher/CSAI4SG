@@ -256,9 +256,6 @@ p_cluster = pd.DataFrame(park.groupby(['cluster','date'])
 # calculate utilization
 p_cluster['utilization'] = (p_cluster['capacity'] - p_cluster['free']) / p_cluster['capacity']  
 
-# intersect time span of two dataframe
-time_intersect = list(set(t_cluster['date']).intersection(p_cluster['date']))
-
 # select data
 start_date = '2020-2-1' # included
 end_date = '2020-2-8' # excluded
@@ -366,7 +363,7 @@ for hour in p_work['date'].unique():
     driver.set_window_position(0, 0)
     driver.get(mapUrl)
     # wait for 2 seconds for the maps and other assets to be loaded in the browser
-    time.sleep(2)
+    time.sleep(5)
     driver.save_screenshot(image_name_png)
     driver.quit()
     
@@ -382,8 +379,61 @@ images[0].save(os.path.join(parent_path,'running.gif'),
                save_all=True, append_images=images[1:], optimize=False, duration=500, loop=1)
     
     
-    
-    
+
+# try to calcualte an rolling average
+# - - - - - - - - - - - - - - - - 
+
+# calculate sum for each time stamp
+t = pd.DataFrame(traffic.groupby(['date'])['PW'].sum()).reset_index()
+p = pd.DataFrame(park.groupby(['date'])[['capacity','free']].sum()).reset_index() 
+
+# select common 
+# intersect time span of two dataframe
+time_intersect = list(set(t['date']).intersection(p['date']))
+
+# select common times
+t = t[t['date'].isin(time_intersect)]
+p = p[p['date'].isin(time_intersect)]
+
+window_size = 672
+t_rol = t.rolling(window_size, center = True, on ='date', closed = 'both').mean()
+p_rol = p.rolling(window_size, center = True, on ='date', closed = 'both').mean()
+
+# exclude those that ara np.nan
+t_rol.dropna(inplace = True)
+p_rol.dropna(inplace = True)
+
+# calculate utilization
+p_rol['utilization'] = (p_rol['capacity'] - p_rol['free']) / p_rol['capacity']  
+
+# calucate indexed series 
+start_index = min(t_rol['date'])
+end_index = max(t_rol['date'])
+# index of that row 
+t_idx = t_rol.index[t_rol['date'] == start_index][0]
+p_idx = p_rol.index[p_rol['date'] == start_index][0] 
+                    
+t_rol['index'] = t_rol['PW'] / t_rol.at[t_idx,'PW'] * 100
+p_rol['index'] = p_rol['utilization'] / p_rol.at[p_idx,'utilization'] * 100
+
+f = plt.figure()
+f.set_figwidth(20)
+f.set_figheight(10)
+plt.rcParams.update({'font.size': 14})
+
+plt.plot(t_rol['date'], t_rol['index'], color = 'tab:red', label = "Traffic", linewidth=2)
+plt.plot(p_rol['date'], p_rol['index'], color = 'tab:blue', label = "Parking utilization", linewidth=2)
+plt.title('Rolling Average over 28 days')
+
+plt.xlim([start_index, end_index])
+
+plt.xlabel('Time')
+plt.ylabel('Index (' + start_index.strftime('%Y-%m-%d %I%p') + '=100)' )
+plt.legend(loc = 'lower right')
+plt.grid()
+plt.show()
+
+
 
 
 
