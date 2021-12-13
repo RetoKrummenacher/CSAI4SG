@@ -421,15 +421,25 @@ f.set_figwidth(20)
 f.set_figheight(10)
 plt.rcParams.update({'font.size': 14})
 
-plt.plot(t_rol['date'], t_rol['index'], color = 'tab:red', label = "Traffic", linewidth=2)
+plt.plot(t_rol['date'], t_rol['index'], color = 'tab:orange', label = "Traffic", linewidth=2)
 plt.plot(p_rol['date'], p_rol['index'], color = 'tab:blue', label = "Parking utilization", linewidth=2)
-plt.title('Rolling Average over 28 days')
+plt.title('Rolling Average over ' + str(int(window_size/24)) + ' days')
 
 plt.xlim([start_index, end_index])
 
 plt.xlabel('Time')
 plt.ylabel('Index (' + start_index.strftime('%Y-%m-%d %I%p') + '=100)' )
 plt.legend(loc = 'lower right')
+
+# add vertical lines for covid
+x_pos = pd.Timestamp(year=2020, month=3, day = 16, tz='utc')
+plt.axvline(x = x_pos, color = 'tab:red', linestyle='--')
+plt.text(x_pos, 124, 'First Lockdown', color = 'tab:red', backgroundcolor='white')
+
+x_pos = pd.Timestamp(year=2020, month=10, day = 15, tz='utc')
+plt.axvline(x = x_pos, color = 'tab:red', linestyle='--')
+plt.text(x_pos, 124, 'Second Lockdown', color = 'tab:red', backgroundcolor='white')
+
 plt.grid()
 plt.show()
 
