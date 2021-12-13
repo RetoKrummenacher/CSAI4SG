@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e75828f7cf15404d8a4ceed980c964e6 {
+                    position: relative;
+                    width: 975.0px;
+                    height: 575.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.css"/>
+</head>
+<body>    
+    
+                 <h3 align="left" style="font-size:16px;"><b>Thursday 06 February, 2020 - 08AM</b></h3>
+                 
+    
+            <div class="folium-map" id="map_e75828f7cf15404d8a4ceed980c964e6" ></div>
+        
+</body>
+<script>    
+    
+            var map_e75828f7cf15404d8a4ceed980c964e6 = L.map(
+                "map_e75828f7cf15404d8a4ceed980c964e6",
+                {
+                    center: [47.55777131440573, 7.5918295281706865],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 14,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_574ddad2415746d8a2f5c6cf2c6310dd = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var marker_583c30aa897e49dc83cdb4404fb8a4fb = L.marker(
+                [47.56118158101615, 7.588564901186044],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_770ace76a87242fb96fd9225e38a0b9d = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(40deg);\n                    color:#ffcc00;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_583c30aa897e49dc83cdb4404fb8a4fb.setIcon(beautify_icon_770ace76a87242fb96fd9225e38a0b9d);
+        
+    
+            marker_583c30aa897e49dc83cdb4404fb8a4fb.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 1580
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5f0c0ab48ae24033a2834f0fc2c06117 = L.marker(
+                [47.55866679121571, 7.592048476255378],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_bb76099d2bb14cfa9d42f28748f14dd1 = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(220deg);\n                    color:#ffcc00;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_5f0c0ab48ae24033a2834f0fc2c06117.setIcon(beautify_icon_bb76099d2bb14cfa9d42f28748f14dd1);
+        
+    
+            marker_5f0c0ab48ae24033a2834f0fc2c06117.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 1153
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_98bbd50ca84a4f26b00108fbbff5be3e = L.marker(
+                [47.57118487571712, 7.600878933966805],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_7220bd1d377b425485296f5fd48f9185 = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(30deg);\n                    color:#ff9933;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_98bbd50ca84a4f26b00108fbbff5be3e.setIcon(beautify_icon_7220bd1d377b425485296f5fd48f9185);
+        
+    
+            marker_98bbd50ca84a4f26b00108fbbff5be3e.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 1762
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_44c1fd4b74a248b59f721ac167ac01ab = L.marker(
+                [47.56659343678, 7.605334669686331],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_50456bf276b14beea6cdd00213ef4ec7 = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(265deg);\n                    color:#ffcc00;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_44c1fd4b74a248b59f721ac167ac01ab.setIcon(beautify_icon_50456bf276b14beea6cdd00213ef4ec7);
+        
+    
+            marker_44c1fd4b74a248b59f721ac167ac01ab.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 1035
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c64e7a2dc91a41319df5bfbbb940d284 = L.marker(
+                [47.55521649435031, 7.575291688622761],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_e86bd1dada9247b88c4927b6c9a85e18 = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(290deg);\n                    color:#ff9933;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_c64e7a2dc91a41319df5bfbbb940d284.setIcon(beautify_icon_e86bd1dada9247b88c4927b6c9a85e18);
+        
+    
+            marker_c64e7a2dc91a41319df5bfbbb940d284.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 2198
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_271f3fe52550467585b08bec83f37e25 = L.marker(
+                [47.55970599232563, 7.580109075351799],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_a670fcf46b734f69a0c86551ad993e54 = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(140deg);\n                    color:#ffcc00;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_271f3fe52550467585b08bec83f37e25.setIcon(beautify_icon_a670fcf46b734f69a0c86551ad993e54);
+        
+    
+            marker_271f3fe52550467585b08bec83f37e25.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 1098
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_0b3d0b38f8e147408c1410a27eeb6afb = L.marker(
+                [47.55380087693972, 7.595126984456187],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_46782c1eb4944209bbc258cc1c76f59e = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(100deg);\n                    color:#ff9933;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_0b3d0b38f8e147408c1410a27eeb6afb.setIcon(beautify_icon_46782c1eb4944209bbc258cc1c76f59e);
+        
+    
+            marker_0b3d0b38f8e147408c1410a27eeb6afb.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 1848
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_705e797b91ad42c1980a6302089d6a3a = L.marker(
+                [47.549809396450826, 7.593506716982079],
+                {}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            var beautify_icon_98a8af443a714f35819cb6514b0b05fc = new L.BeautifyIcon.icon(
+                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:8rem;transform: rotate(-55deg);\n                    color:#ff9933;opacity:0.8;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
+            )
+            marker_705e797b91ad42c1980a6302089d6a3a.setIcon(beautify_icon_98a8af443a714f35819cb6514b0b05fc);
+        
+    
+            marker_705e797b91ad42c1980a6302089d6a3a.bindTooltip(
+                `<div>
+                     Anzahl Personenwagen: 2178
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_e9cd2a1a78b6466bb52bb78deb569f23 = L.circle(
+                [47.563625981205035, 7.597494837472192],
+                {"bubblingMouseEvents": true, "color": "grey", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8000", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 450, "stroke": true, "weight": 1}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            circle_e9cd2a1a78b6466bb52bb78deb569f23.bindTooltip(
+                `<div>
+                     Frei: 1057; Kapazität: 2385; Belegung: 55.7%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_d0e32c77712943108a604940f35ea697 = L.circle(
+                [47.552285168616876, 7.585847935404933],
+                {"bubblingMouseEvents": true, "color": "grey", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8000", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 450, "stroke": true, "weight": 1}
+            ).addTo(map_e75828f7cf15404d8a4ceed980c964e6);
+        
+    
+            circle_d0e32c77712943108a604940f35ea697.bindTooltip(
+                `<div>
+                     Frei: 1246; Kapazität: 3515; Belegung: 64.60000000000001%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>

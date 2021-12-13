@@ -6,6 +6,8 @@ Created on Wed Dec  8 15:33:39 2021
 """
 
 import pandas as pd               # a data.frame handler like R
+import numpy as np                # for histograms
+import bisect                     # for bin determination
 import folium                     # displaying maps
 from folium.plugins import BeautifyIcon
 import os, sys
@@ -18,6 +20,8 @@ import math
 import PIL as pil                 # for saving gifs
 
 import time
+
+import imgkit
 
 
 """ 
@@ -59,34 +63,38 @@ def plot_dot_traffic(row, color, map_obj):
                         + ' cars on average per hour 2019'
                         ).add_to(map_obj)
 
-def plot_park_cluster(cord, color, map_obj):
+def plot_park_cluster(cord, color, map_obj, free, capacity, utilization):
     folium.Circle(location=cord, radius=450, fill_color = color,
-                  fill=True, color='grey', weight=1, fill_opacity=0.4).add_to(map_obj)
+                  fill=True, color='grey', weight=1, 
+                  tooltip='Frei: ' + str(free) + '; Kapazität: ' + str(capacity) + 
+                  '; Belegung: ' + str(round(utilization,3) * 100)+ '%', 
+                  fill_opacity=0.4).add_to(map_obj)
     
-def plot_arrow(cord, angle, color, map_obj):
+def plot_arrow(cord, angle, color, map_obj, pw, size=9):
     icon_arrow = BeautifyIcon(
         icon=' fa fa-angle-double-down',
-        inner_icon_style="""font-size:9rem;transform: rotate({0}deg);
-                    color:{1};opacity:0.6;""".format(angle, color),
+        inner_icon_style="""font-size:{2}rem;transform: rotate({0}deg);
+                    color:{1};opacity:0.8;""".format(angle, color, size),
         background_color='transparent',
         border_color='transparent',
     )
     
     # add arrow
-    folium.Marker(location=cord, icon=icon_arrow).add_to(map_obj)
+    folium.Marker(location=cord, icon=icon_arrow,
+                  tooltip='Anzahl Personenwagen: ' + str(pw)).add_to(map_obj)
     
-def change_date(df, time_col, unique_col, new_col):
+def change_date(df, time_col, new_col):
     df = df.copy()  # copy need if changes in dataframe, else just reference
     # convert date str to utc rounded hours
     df[new_col] = pd.to_datetime(df[time_col], utc = True)
     # round on 15 minutes, the get those nearest to full hour
     df[new_col] = df[new_col].dt.round('15min')
     # drop duplicates 
-    df = df.drop_duplicates(subset = [new_col, unique_col])
+    df = df.drop_duplicates()
     # round on full hour
     df[new_col]  = df[new_col].dt.round('H')    
     # drop duplicates 
-    df = df.drop_duplicates(subset = [new_col, unique_col])
+    df = df.drop_duplicates()
     # only use those at full hour
     return df
 
@@ -119,34 +127,26 @@ def check_on_date(df, df_ori, time_col, time_col_ori, number_per_hour):
 
         
 # coordinate
-# coordinate
 basel = [47.55777131440573, 7.5918295281706865]  # basel
 inter_tokb = [47.55866679121571, 7.592048476255378] # arrow to kleinbasel
 inter_togb = [47.56118158101615, 7.588564901186044] # arrow to kleinbasel
 kb_in = [47.57118487571712, 7.600878933966805] # kleinbasel in
 kb_out = [47.56659343678, 7.605334669686331] # kleinbasel out
-gb_west_in = [47.55522242670782, 7.576898975372455] # gb in form west
-gb_west_out = [47.559049484406906, 7.5799774835732645] # gb out to west
-gb_est_in = [47.55380087693972, 7.595126984456187] # gb in form est
-gb_est_out = [47.549809396450826, 7.593506716982079] # gb out to est
+gb_west_in = [47.55521649435031, 7.575291688622761] # gb in form west
+gb_west_out = [47.55970599232563, 7.580109075351799] # gb out to west
+gb_east_in = [47.55380087693972, 7.595126984456187] # gb in form est
+gb_east_out = [47.549809396450826, 7.593506716982079] # gb out to est
 kb = [47.563625981205035, 7.597494837472192]  # kleinbasel
-gb = [47.551745406132355, 7.5874981679309625] # grossbasel
+gb = [47.552285168616876, 7.585847935404933] # grossbasel
 
 # arrow list incldugin the angle of arrow
-arrows = [(inter_togb, 40), (inter_tokb, 220), (kb_in, 30), (kb_out,265), 
-          (gb_west_in, 290), (gb_west_out,140), (gb_est_in, 100), 
-          (gb_est_out, -55)]
+arrows = {'inter_togb' : (inter_togb, 40), 'inter_tokb': (inter_tokb, 220),
+          'kb_in' : (kb_in, 30), 'kb_out' : (kb_out,265), 
+          'gb_west_in' : (gb_west_in, 290), 'gb_west_out' : (gb_west_out,140), 
+          'gb_east_in' : (gb_east_in, 100), 'gb_east_out' : (gb_east_out, -55)}
 # cluster list
-clusters = [kb,gb]
-    
-def plot_clusters(map_obj):
-    for cord, angle in arrows:       
-        plot_arrow(cord, angle, 'red', map_obj)
-    
-    for cord in clusters:
-        plot_park_cluster(cord, 'blue', map_obj)        
-  
-
+clusters = {'kb' : kb, 'gb' : gb}
+   
 # # path setting for all the scripts
 # sys.path.append(os.path.dirname(__file__))
 # # path setting for all the data
@@ -181,15 +181,15 @@ park.rename(columns={'Name': 'name'}, inplace = True)
 traffic['name'] = traffic['SiteName'].apply(lambda x: change_site_name(x)) 
 
 # use function to change date
-park = change_date(park, 'Publikationszeit', 'name', 'date')
+park = change_date(park, 'Publikationszeit', 'date')
 # check dates in park
-value_counts_p, mis_p = check_on_date(park, park_raw, 'date', 'Publikationszeit', 15)
+# value_counts_p, mis_p = check_on_date(park, park_raw, 'date', 'Publikationszeit', 15)
 # some days and hours are missing completely, check mis_p
 
 # use function to change date
-traffic = change_date(traffic, 'DateTimeTo', 'name', 'date')
+traffic = change_date(traffic, 'DateTimeTo', 'date')
 # check dates in traffic, there are 29 unique counting stations
-value_counts_t, mis_t = check_on_date(traffic, traffic_raw, 'date', 'DateTimeTo', 29)
+# value_counts_t, mis_t = check_on_date(traffic, traffic_raw, 'date', 'DateTimeTo', 29)
 # many counting stations have not full set, check value_counts_t
 # e.g. aussere Baselstrasse missing for 2019-03-24, 23:00
 
@@ -217,7 +217,7 @@ park['utilization'] = (park['capacity'] - park['free']) / park['capacity']
 
 # average counts over 2019 per day
 # select 2019 data
-df2019 = traffic[traffic['date'].dt.year == 2019]
+df2019 = traffic[traffic['date'].dt.year == 2019].copy()
 # average over PW group by site
 df2019_avg = pd.DataFrame(df2019.groupby('name')['PW'].mean())
 df2019_avg.rename(columns={'PW' : 'average'}, inplace=True)
@@ -227,8 +227,7 @@ traffic = traffic.merge(df2019_avg, left_on = 'name', right_on = 'name',
 
 # add clustering to data
 traffic = traffic.merge(traffic_cluster[['geoPoint','DirectionName','cluster']], 
-                    left_on = ['geoPoint','DirectionName'], right_on = ['geoPoint','DirectionName'], 
-                     how = 'left').set_axis(traffic.index)
+                    on = ['geoPoint','DirectionName'], how = 'left').set_axis(traffic.index)
 park = park.merge(park_cluster[['geoPoint','cluster']], left_on = 'geoPoint', right_on = 'geoPoint', 
                      how = 'left').set_axis(park.index) 
 
@@ -239,97 +238,155 @@ park = park.merge(park_cluster[['geoPoint','cluster']], left_on = 'geoPoint', ri
 u_traffic = traffic[['lat','lng','name', 'average']].drop_duplicates()
 u_park = park[['lat','lng','name','Total Plätze']].drop_duplicates()
 
-
-m = folium.Map(basel, width=975, height =575, zoom_start=14, tiles='CartoDB Positron')
+m = folium.Map(basel,zoom_start=14, tiles='CartoDB Positron')
 u_park.apply(plot_dot_park, color = 'blue', map_obj = m, axis = 1)
 u_traffic.apply(plot_dot_traffic, color = 'red', map_obj = m, axis = 1)
 
-m.save("overview.html")
+m.save(os.path.join(parent_path,"overview.html"))
 
-# html for clustering
-# - - - - - - - - - 
-m = folium.Map(basel, width=975, height =575, zoom_start=14, tiles='CartoDB Positron')
-plot_clusters(m)
-m.save("clusters.html")
 
 # create the html for over time for the clusters
 # - - - - - - - - - - - - - - - - - - - - 
-
 # aggregate data over cluster for traffic and parking by time
 # reset index to keep by cols as columns and not as index
 t_cluster = pd.DataFrame(traffic.groupby(['cluster','date'])['PW'].sum()).reset_index()
 p_cluster = pd.DataFrame(park.groupby(['cluster','date'])
-                         [['Total Plätze','Anzahl frei']].sum()).reset_index()
+                         [['capacity','free']].sum()).reset_index()
 
 # calculate utilization
-p_cluster['utilization'] = (p_cluster['Total Plätze'] - p_cluster['Anzahl frei']) / p_cluster['Total Plätze']  
+p_cluster['utilization'] = (p_cluster['capacity'] - p_cluster['free']) / p_cluster['capacity']  
 
 # intersect time span of two dataframe
 time_intersect = list(set(t_cluster['date']).intersection(p_cluster['date']))
-# loop over time
-relevant_time = [x for x in time_intersect if dt.datetime(2020,2,1) <= x < dt.datetime(2020,2,8)]
-relevant_time.sort()
 
-# # some seem to miss: RKR checked 2021-12-11 an its ok after changing change_date() if clause
-# p_rel = p_cluster.loc[(p_cluster['date'] > '2020-02-03 16:00') & (p_cluster['date'] < '2020-02-04 01:00')]
-# t_rel = t_cluster.loc[(t_cluster['date'] > '2020-02-03 16:00') & (t_cluster['date'] < '2020-02-04 01:00')]
+# select data
+start_date = '2020-2-1' # included
+end_date = '2020-2-8' # excluded
+# get our data and make sure to use copies
+p_work = p_cluster[(p_cluster['date'] >= start_date) & (p_cluster['date'] < end_date)].copy()
+t_work = t_cluster[(t_cluster['date'] >= start_date) & (t_cluster['date'] < end_date)].copy()
 
-for hour in relevant_time():
+
+def add_colors(entry, edges):
+    # color dictionary with HEX colors
+    d = {1 : '#bfff00', 2 : '#ffff00', 3 : '#ffbf00', 
+             4 : '#ff8000', 5 : '#ff4000'}
+    
+    # determin bin number
+    bin = bisect.bisect_left(edges, entry)
+    # return the color from the dictionary
+    return d.get(bin,1)    
+
+# different sizes doesn't look got, so same size for all
+def add_colors_size(entry, edges, what = 'c'):
+    # color dictionary with HEX colors
+    d = {1 : ('#00cc00',8), 2 : ('#ffcc00',8), 3 : ('#ff9933',8), 
+             4 : ('#ff5050',8), 5 : ('#b30000',8)}
+    
+    # determin bin number
+    bin = bisect.bisect_left(edges, entry)
+    # bin can be zero (no clue why 0 <0.0)
+    if bin == 0:
+        bin = 1    
+    # return the color from the dictionary
+    color, size =  d.get(bin)
+    if what == 's':
+        return size
+    else:
+        return color
+
+
+# generate histogram with 5 bins for colors
+hist = np.histogram(p_work['utilization'].unique(), bins = 5)
+# edges for the bins, a bin lies between two numbers
+edges = list(hist[1])
+# generate color from data
+p_work['color'] = p_work.apply(lambda row: add_colors(row['utilization'], edges), axis=1)
+# same for traffic
+hist = np.histogram(t_work['PW'].unique(), bins = 5)
+# edges for the bins, a bin lies between two numbers
+edges = list(hist[1])
+# generate color from data
+t_work['color'] = t_work.apply(lambda row: add_colors_size(row['PW'], edges), axis=1)
+t_work['size'] = t_work.apply(lambda row: add_colors_size(row['PW'], edges, 's'), axis=1)
+
+
+# empty images list
+images = []
+
+# loop over hours in work frames
+for hour in p_work['date'].unique():   
     # select data
-    p = p_cluster.loc[(p_cluster['date'] == hour)]
-    t = t_cluster.loc[(t_cluster['date'] == hour)]
+    p = p_work.loc[(p_work['date'] == hour)]
+    t = t_work.loc[(t_work['date'] == hour)]
     
     # do the map
     m = folium.Map(basel, width=975, height =575, zoom_start=14, tiles='CartoDB Positron')
     
+    # plot the arrows
+    for key, tup in arrows.items():      
+        # get color and size of that cord
+        idx = t.index[t['cluster'] == key][0]  # index of row with cluster == key
+        color = t.at[idx ,'color']
+        size = t.at[idx ,'size']
+        pw = t.at[idx ,'PW']
+        plot_arrow(tup[0], tup[1], color, m, pw, size)    
+        
+    # plot the parking clusters
+    for key, cluster in clusters.items():      
+        # get color and size of that cord
+        idx = p.index[p['cluster'] == key][0]  # index of row with cluster == key
+        color = p.at[idx ,'color']   
+        free = p.at[idx ,'free']   
+        capacity = p.at[idx ,'capacity']   
+        utilization = p.at[idx ,'utilization']   
+        plot_park_cluster(cluster, color, m, free, capacity, utilization) 
+        
+    # add a title to the html
+    title = hour.strftime("%A %d %B, %Y - %I%p")
+    title_html = '''
+                 <h3 align="left" style="font-size:16px;"><b>{}</b></h3>
+                 '''.format(title)   
+
+    m.get_root().html.add_child(folium.Element(title_html))
+    
+    image_name = hour.strftime('%Y_%m_%d_%I%p')
+    image_name_html = os.path.join(parent_path,
+                                'html',image_name + '.html')
+    image_name_png = os.path.join(parent_path,
+                                'png',image_name + '.png')
+    m.save(image_name_html)   
+            
+    # html to pgn
+    mapUrl = 'file://{0}/{1}'.format(os.path.join(parent_path,
+                                'html'), image_name + '.html')
+    # use selenium webdriver to save the html as png image
+    driver = webdriver.Firefox()
+    driver.set_window_size(1000, 700)
+    driver.set_window_position(0, 0)
+    driver.get(mapUrl)
+    # wait for 2 seconds for the maps and other assets to be loaded in the browser
+    time.sleep(2)
+    driver.save_screenshot(image_name_png)
+    driver.quit()
+    
+    # add to images list
+    im = pil.Image.open(image_name_png)
+    images.append(im)
+    
+    # loop
+ 
+    
+ # duration in milli seconds, endless: loop = 0
+images[0].save(os.path.join(parent_path,'running.gif'),
+               save_all=True, append_images=images[1:], optimize=False, duration=500, loop=1)
+    
+    
+    
     
 
 
 
-# html to pgn
-mapFname = 'mymap.html'
-mapUrl = 'file://{0}/{1}'.format(os.getcwd(), mapFname)
-# use selenium webdriver to save the html as png image
-driver = webdriver.Firefox()
-driver.set_window_size(1000, 700)
-driver.set_window_position(0, 0)
-driver.get(mapUrl)
-# wait for 2 seconds for the maps and other assets to be loaded in the browser
-time.sleep(2)
-driver.save_screenshot(os.path.join('png','o.png'))
-driver.quit()
-
-# add a title to the html
-loc = traffic.at[1,'date'].strftime("%A %d %B, %Y - %I%p")
-title_html = '''
-             <h3 align="center" style="font-size:16px; background-color:rgb(220,220,220);"><b>{}</b></h3>
-             '''.format(loc)   
-
-m.get_root().html.add_child(folium.Element(title_html))
-
-
-
-# plot line for all counting stations
-agg = traffic.groupby(['date']).PW.agg('sum')
-agg = agg.reset_index()
-
-# select just on hour
-hour_slice = agg[agg['date'].dt.hour == 10]
-x = hour_slice['date']
-y = hour_slice['PW']
-
-# plot
-plt.style.use('seaborn-whitegrid')
-fig = plt.figure()
-ax = plt.axes()
-ax.plot(x,y)
-
-
-
-
-# calculate arrow
-47.547981303298585, 7.598350672962081
-47.54998125941649, 7.596247845638821
 
 
 
