@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_4883aba9ddab4b648fe8fdc852db61a6 {
+                #map_ff86bbc0e71f48358e5e31dc3d28b1bf {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -32,18 +32,16 @@
                 }
             </style>
         
-    <script src="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.css"/>
 </head>
 <body>    
     
-            <div class="folium-map" id="map_4883aba9ddab4b648fe8fdc852db61a6" ></div>
+            <div class="folium-map" id="map_ff86bbc0e71f48358e5e31dc3d28b1bf" ></div>
         
 </body>
 <script>    
     
-            var map_4883aba9ddab4b648fe8fdc852db61a6 = L.map(
-                "map_4883aba9ddab4b648fe8fdc852db61a6",
+            var map_ff86bbc0e71f48358e5e31dc3d28b1bf = L.map(
+                "map_ff86bbc0e71f48358e5e31dc3d28b1bf",
                 {
                     center: [47.55777131440573, 7.5918295281706865],
                     crs: L.CRS.EPSG3857,
@@ -57,117 +55,457 @@
 
         
     
-            var tile_layer_10cbbf6f3f2849c7aedacba798e10a05 = L.tileLayer(
+            var tile_layer_504e97432770478289891c8ed2583133 = L.tileLayer(
                 "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                 {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var marker_228689b21d464a1a9ffd9987ab5a242a = L.marker(
-                [47.56118158101615, 7.588564901186044],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_eca971ba23774c8b9d9779375bf68883 = L.circle(
+                [47.5707346457, 7.58226721123],
+                {"bubblingMouseEvents": true, "color": "#00cc00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00cc00", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_d800fd019b4c451eb61aa75444e9466d = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(40deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_228689b21d464a1a9ffd9987ab5a242a.setIcon(beautify_icon_d800fd019b4c451eb61aa75444e9466d);
+            circle_eca971ba23774c8b9d9779375bf68883.bindTooltip(
+                `<div>
+                     Dreirosenbrücke lokal: 147 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var marker_9e2839c33497450a980f2ec1d3298993 = L.marker(
-                [47.55866679121571, 7.592048476255378],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_5add9105f0a341b9b0d01c141f1b81e7 = L.circle(
+                [47.5656137668, 7.58805266441],
+                {"bubblingMouseEvents": true, "color": "#00cc00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00cc00", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_04cfa562f7d142bd9cb0bd643aa391c7 = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(220deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_9e2839c33497450a980f2ec1d3298993.setIcon(beautify_icon_04cfa562f7d142bd9cb0bd643aa391c7);
+            circle_5add9105f0a341b9b0d01c141f1b81e7.bindTooltip(
+                `<div>
+                     Johanniterbrücke: 202 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var marker_088cedce307d49a181509106b7f7c7f0 = L.marker(
-                [47.57118487571712, 7.600878933966805],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_a535ff3ae0e54fb98b2a677a71d236cf = L.circle(
+                [47.5582014188, 7.59753472493],
+                {"bubblingMouseEvents": true, "color": "#00cc00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00cc00", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_c90bd0db4c2c425a8fb7a47bfc97f2b8 = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(30deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_088cedce307d49a181509106b7f7c7f0.setIcon(beautify_icon_c90bd0db4c2c425a8fb7a47bfc97f2b8);
+            circle_a535ff3ae0e54fb98b2a677a71d236cf.bindTooltip(
+                `<div>
+                     Wettsteinbrücke: 222 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var marker_e970057212b84f5c92628671fb0272e9 = L.marker(
-                [47.56659343678, 7.605334669686331],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_73451c07f5614702b99a9eb58f1c16be = L.circle(
+                [47.5499027851, 7.58292410405],
+                {"bubblingMouseEvents": true, "color": "#cc9900", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc9900", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 40, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_9e54b18ae0e64453a3d37eae383655ce = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(265deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_e970057212b84f5c92628671fb0272e9.setIcon(beautify_icon_9e54b18ae0e64453a3d37eae383655ce);
+            circle_73451c07f5614702b99a9eb58f1c16be.bindTooltip(
+                `<div>
+                     Viaduktstrasse 60: 170 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var marker_221adb8b96d74566951fbb7de424f60a = L.marker(
-                [47.55522242670782, 7.576898975372455],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_2eb88b29fe184e4baa1267482fd00622 = L.circle(
+                [47.5441806077, 7.57712039374],
+                {"bubblingMouseEvents": true, "color": "#cc9900", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc9900", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_6d01e30d57dc4ff0974598d3005e2317 = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(290deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_221adb8b96d74566951fbb7de424f60a.setIcon(beautify_icon_6d01e30d57dc4ff0974598d3005e2317);
+            circle_2eb88b29fe184e4baa1267482fd00622.bindTooltip(
+                `<div>
+                     Dorenbachviadukt: 287 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var marker_200a30043e294821ac4af1ec234cbd0e = L.marker(
-                [47.559049484406906, 7.5799774835732645],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_7de3fb053ea74c43bd1f39b4f10cf280 = L.circle(
+                [47.5621767136, 7.56405911184],
+                {"bubblingMouseEvents": true, "color": "#cc9900", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc9900", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_970f433a397841f1b9f092a15c22bfc4 = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(140deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_200a30043e294821ac4af1ec234cbd0e.setIcon(beautify_icon_970f433a397841f1b9f092a15c22bfc4);
+            circle_7de3fb053ea74c43bd1f39b4f10cf280.bindTooltip(
+                `<div>
+                     Wasgenring 62: 283 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var marker_cd0b72c964674c108096e5b1d399de20 = L.marker(
-                [47.55380087693972, 7.595126984456187],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_8aef6d53afe840e5a03bf45640ee6dff = L.circle(
+                [47.5680940673, 7.57380422434],
+                {"bubblingMouseEvents": true, "color": "#cc9900", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc9900", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_b7a92eff88aa4a23a2f510eb9f215ebc = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(100deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_cd0b72c964674c108096e5b1d399de20.setIcon(beautify_icon_b7a92eff88aa4a23a2f510eb9f215ebc);
+            circle_8aef6d53afe840e5a03bf45640ee6dff.bindTooltip(
+                `<div>
+                     Entenweidstrasse 74: 62 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var marker_df3aedad476d4417b2324980bf4c413b = L.marker(
-                [47.549809396450826, 7.593506716982079],
-                {}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_a9f7b023a2c645d1a73f8a38889dabf2 = L.circle(
+                [47.5676129884, 7.57101717908],
+                {"bubblingMouseEvents": true, "color": "#cc9900", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc9900", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 40, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var beautify_icon_1b6ec617b8114d4d98af2df6be2894a0 = new L.BeautifyIcon.icon(
-                {"backgroundColor": "transparent", "borderColor": "transparent", "borderWidth": 3, "icon": " fa fa-angle-double-down", "innerIconStyle": "font-size:9rem;transform: rotate(-55deg);\n                    color:red;opacity:0.6;", "isAlphaNumericIcon": false, "spin": false, "textColor": "#000"}
-            )
-            marker_df3aedad476d4417b2324980bf4c413b.setIcon(beautify_icon_1b6ec617b8114d4d98af2df6be2894a0);
+            circle_a9f7b023a2c645d1a73f8a38889dabf2.bindTooltip(
+                `<div>
+                     Flughafenstrasse 30: 154 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
         
     
-            var circle_f106ac60623e4123a459ea7fa44b895d = L.circle(
-                [47.563625981205035, 7.597494837472192],
-                {"bubblingMouseEvents": true, "color": "grey", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 450, "stroke": true, "weight": 1}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            var circle_e5e6fa556a074ac5a028c6868f58e74b = L.circle(
+                [47.5741246781, 7.57471395015],
+                {"bubblingMouseEvents": true, "color": "#cc9900", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc9900", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
         
     
-            var circle_093abe5a68fa4d2fb12c4101effa3bd5 = L.circle(
-                [47.552285168616876, 7.585847935404933],
-                {"bubblingMouseEvents": true, "color": "grey", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 450, "stroke": true, "weight": 1}
-            ).addTo(map_4883aba9ddab4b648fe8fdc852db61a6);
+            circle_e5e6fa556a074ac5a028c6868f58e74b.bindTooltip(
+                `<div>
+                     Elsässerstrasse 146: 124 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_15d5c4182da942ae9206cd55e119feb6 = L.circle(
+                [47.5722888439, 7.6239861801],
+                {"bubblingMouseEvents": true, "color": "#9900cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9900cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_15d5c4182da942ae9206cd55e119feb6.bindTooltip(
+                `<div>
+                     Äussere Baselstrasse 381: 173 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_cfc49e5958d3481ca8d952014bb56f12 = L.circle(
+                [47.5704032206, 7.62857136599],
+                {"bubblingMouseEvents": true, "color": "#9900cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9900cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_cfc49e5958d3481ca8d952014bb56f12.bindTooltip(
+                `<div>
+                     Bäumlihofstrasse: 156 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_da6d9440c17e42c9bf1fecf7e3113b5e = L.circle(
+                [47.5628059399, 7.63010594485],
+                {"bubblingMouseEvents": true, "color": "#9900cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9900cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_da6d9440c17e42c9bf1fecf7e3113b5e.bindTooltip(
+                `<div>
+                     Grenzacherstrasse 511: 315 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_26373949f3b44e0ab3ce0eecda5b54e5 = L.circle(
+                [47.5527116018, 7.60459281521],
+                {"bubblingMouseEvents": true, "color": "#9900cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9900cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_26373949f3b44e0ab3ce0eecda5b54e5.bindTooltip(
+                `<div>
+                     St. Alban-Anlage 72: 179 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_195c4d5dffb445fbac829fb52468f5d9 = L.circle(
+                [47.5665568071, 7.59767325247],
+                {"bubblingMouseEvents": true, "color": "#9900cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9900cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_195c4d5dffb445fbac829fb52468f5d9.bindTooltip(
+                `<div>
+                     Riehenring 120: 147 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_686813584a704e0c831d0c64425955cc = L.circle(
+                [47.5381329483, 7.59973013355],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_686813584a704e0c831d0c64425955cc.bindTooltip(
+                `<div>
+                     Gundeldingerstrasse 428: 228 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_1b2fcbe981434461a63eb4d5b9b65b7e = L.circle(
+                [47.5451875415, 7.6017439017],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_1b2fcbe981434461a63eb4d5b9b65b7e.bindTooltip(
+                `<div>
+                     Grosspeterstrasse 45: 369 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_1f975893642844ab8f5ef1687bc6d368 = L.circle(
+                [47.5463002054, 7.5956105688],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 40, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_1f975893642844ab8f5ef1687bc6d368.bindTooltip(
+                `<div>
+                     Nauenstrasse 73: 300 cars on average per hour 2019
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_e206172ce1e9442fb47fed0941cce712 = L.circle(
+                [47.5504299, 7.5943046],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_e206172ce1e9442fb47fed0941cce712.bindTooltip(
+                `<div>
+                     Aeschen: Total 97 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_e6de1ff735b54af1b6dfe0e8b3384952 = L.circle(
+                [47.561101, 7.5824076],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_e6de1ff735b54af1b6dfe0e8b3384952.bindTooltip(
+                `<div>
+                     City: Total 1114 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_e4e98431fd004600adf4443eeff4baee = L.circle(
+                [47.5592347, 7.58658],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_e4e98431fd004600adf4443eeff4baee.bindTooltip(
+                `<div>
+                     Storchen: Total 142 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_21202b33417d42c78b1fc366fb82afd0 = L.circle(
+                [47.5515968, 7.593512],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_21202b33417d42c78b1fc366fb82afd0.bindTooltip(
+                `<div>
+                     Anfos: Total 168 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_6e594e82cdae43078a06c21db9e02908 = L.circle(
+                [47.5458851, 7.5884556],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_6e594e82cdae43078a06c21db9e02908.bindTooltip(
+                `<div>
+                     Bahnhof Süd: Total 160 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_bfb55fbf64f548a28cc28ae5d68855da = L.circle(
+                [47.5506254, 7.5874932],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_bfb55fbf64f548a28cc28ae5d68855da.bindTooltip(
+                `<div>
+                     Elisabethen: Total 840 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_b323bcd2c7f14da0a0b3400831ce04bc = L.circle(
+                [47.5468617, 7.5929374],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_b323bcd2c7f14da0a0b3400831ce04bc.bindTooltip(
+                `<div>
+                     Post Basel: Total 77 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_e784c07dd04d46bf97b9a7634e23afc4 = L.circle(
+                [47.547299, 7.5922975],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_e784c07dd04d46bf97b9a7634e23afc4.bindTooltip(
+                `<div>
+                     Centralbahnparking: Total 391 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_693ca4cc49fd4d15a77316847c49d403 = L.circle(
+                [47.5524554, 7.5858936],
+                {"bubblingMouseEvents": true, "color": "#0033cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0033cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 40, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_693ca4cc49fd4d15a77316847c49d403.bindTooltip(
+                `<div>
+                     Steinen: Total 526 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_30c60a0f57ba43d0836e0bb405b62ed2 = L.circle(
+                [47.5630411, 7.5967098],
+                {"bubblingMouseEvents": true, "color": "#0099cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0099cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_30c60a0f57ba43d0836e0bb405b62ed2.bindTooltip(
+                `<div>
+                     Europe: Total 120 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_64895c905e8e4ab4882c885691f14f1c = L.circle(
+                [47.5639644, 7.5946604],
+                {"bubblingMouseEvents": true, "color": "#0099cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0099cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_64895c905e8e4ab4882c885691f14f1c.bindTooltip(
+                `<div>
+                     Claramatte: Total 125 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_cf90eaa56f514e2f9a7ef18c86d9f0f1 = L.circle(
+                [47.5622725, 7.5917937],
+                {"bubblingMouseEvents": true, "color": "#0099cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0099cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_cf90eaa56f514e2f9a7ef18c86d9f0f1.bindTooltip(
+                `<div>
+                     Clarahuus: Total 100 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_95de4dbf10b24b28860344a2602f082b = L.circle(
+                [47.5651794, 7.6089067],
+                {"bubblingMouseEvents": true, "color": "#0099cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0099cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_95de4dbf10b24b28860344a2602f082b.bindTooltip(
+                `<div>
+                     Bad. Bahnhof: Total 960 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_9ca3e59fe5234b52b25a299ebb0dd449 = L.circle(
+                [47.563241, 7.602175],
+                {"bubblingMouseEvents": true, "color": "#0099cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0099cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_9ca3e59fe5234b52b25a299ebb0dd449.bindTooltip(
+                `<div>
+                     Messe: Total 830 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_7a9e2126b0fb434597a84537794c6cc4 = L.circle(
+                [47.5607142, 7.594263],
+                {"bubblingMouseEvents": true, "color": "#0099cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0099cc", "fillOpacity": 1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(map_ff86bbc0e71f48358e5e31dc3d28b1bf);
+        
+    
+            circle_7a9e2126b0fb434597a84537794c6cc4.bindTooltip(
+                `<div>
+                     Rebgasse: Total 250 Plätze
+                 </div>`,
+                {"sticky": true}
+            );
         
 </script>

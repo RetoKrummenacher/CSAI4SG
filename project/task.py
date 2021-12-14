@@ -47,17 +47,27 @@ def change_park_free(entry, name, d):
             
     return entry
 
-def plot_dot_park(row, color, map_obj):
-    #radius = row.PW / maxPW * 10
-    folium.Circle(location=[row.lat, row.lng],radius=30, color = color,
+def plot_dot_park(row, color, edges, map_obj):
+    
+    # determin radius
+    d = {1: 20, 2: 40, 3: 60}
+    bin = bisect.bisect_left(edges, row['capacity'])
+    rad = d.get(bin, 20)     
+    
+    folium.Circle(location=[row.lat, row.lng], radius = rad, color = color,
                         fill=True, fillcolor = color, fill_opacity =1, 
-                        tooltip=row['name'] +': Total ' + str(row['Total Plätze']) 
+                        tooltip=row['name'] +': Total ' + str(row['capacity']) 
                         + ' Plätze'
                         ).add_to(map_obj)
 
-def plot_dot_traffic(row, color, map_obj):
-    #radius = row.PW / maxPW * 10
-    folium.Circle(location=[row.lat, row.lng],radius=30, color = color,
+def plot_dot_traffic(row, color, edges, map_obj):
+    
+    # determin radius
+    d = {1: 20, 2: 40, 3: 60}
+    bin = bisect.bisect_left(edges, row['average'])
+    rad = d.get(bin,20)  
+    
+    folium.Circle(location=[row.lat, row.lng], radius=rad, color = color,
                         fill=True, fillcolor = color, fill_opacity =1, 
                         tooltip=row['name'] +': '  + str(int(row['average']))
                         + ' cars on average per hour 2019'
@@ -183,7 +193,7 @@ traffic['name'] = traffic['SiteName'].apply(lambda x: change_site_name(x))
 # use function to change date
 park = change_date(park, 'Publikationszeit', 'date')
 # check dates in park
-# value_counts_p, mis_p = check_on_date(park, park_raw, 'date', 'Publikationszeit', 15)
+value_counts_p, mis_p = check_on_date(park, park_raw, 'date', 'Publikationszeit', 15)
 # some days and hours are missing completely, check mis_p
 
 # use function to change date
@@ -206,6 +216,7 @@ traffic['name'] = traffic['SiteName'].apply(lambda x: change_site_name(x))
 # our solution. set the capacity to the highest value of ever freie platze
 # for cases where there are more freie Plätze then Anzahl
 max_free = pd.DataFrame(park.groupby(['name'])[['Anzahl frei','Total Plätze']].max()).reset_index()
+
 # make dictionary with name as index
 d = max_free.set_index(['name']).to_dict()
 park['free'] = park.apply(lambda row: change_park_free(row['Anzahl frei'], row['name'], d), axis=1)
@@ -236,13 +247,53 @@ park = park.merge(park_cluster[['geoPoint','cluster']], left_on = 'geoPoint', ri
 # - - - - - - - - -
 # select unique geo koordinates
 u_traffic = traffic[['lat','lng','name', 'average']].drop_duplicates()
-u_park = park[['lat','lng','name','Total Plätze']].drop_duplicates()
+u_park = park[['lat','lng','name','capacity']].drop_duplicates()
 
 m = folium.Map(basel,zoom_start=14, tiles='CartoDB Positron')
-u_park.apply(plot_dot_park, color = 'blue', map_obj = m, axis = 1)
-u_traffic.apply(plot_dot_traffic, color = 'red', map_obj = m, axis = 1)
+
+# determin the radius of each plot
+hist = np.histogram(u_park['capacity'].unique(), bins = 3)
+edges = list(hist[1])
+u_park.apply(lambda row: plot_dot_park(row, color = '#1f77b4', edges = edges, map_obj = m) ,axis = 1)
+
+hist = np.histogram(u_traffic['average'].unique(), bins = 3)
+edges = list(hist[1])
+u_traffic.apply(lambda row : plot_dot_traffic(row, color = '#d62728', 
+                                              edges = edges, map_obj = m), axis = 1)
 
 m.save(os.path.join(parent_path,"overview.html"))
+
+
+# html for cluster:
+# - - - - - - - - -
+# select unique geo koordinates
+u_traffic = traffic[['lat','lng','name','cluster','average']].drop_duplicates()
+u_park = park[['lat','lng','name','cluster','capacity']].drop_duplicates()
+
+m = folium.Map(basel,zoom_start=14, tiles='CartoDB Positron')
+
+# now we need to do this in loops over couting spots for 4 clusters
+# each counting spot is included in differnet clusters, thus 4 are enough
+loop_T = [('inter_tokb', '#00cc00'), ('gb_west_in', '#cc9900'),
+        ('kb_out','#9900cc'),('gb_east_out','#cc0000')]
+loop_P = [('gb', '#0033cc'), ('kb', '#0099cc')]
+
+for clus, color in loop_T:
+    # selec data
+    t = u_traffic[u_traffic['cluster'] == clus].copy()        
+    hist = np.histogram(t['average'].unique(), bins = 3)
+    edges = list(hist[1])
+    t.apply(lambda row : plot_dot_traffic(row, color = color, 
+                                        edges = edges, map_obj = m), axis = 1)
+    
+for clus, color in loop_P:  
+    # selec data
+    p = u_park[u_park['cluster'] == clus].copy()
+    hist = np.histogram(p['capacity'].unique(), bins = 3)
+    edges = list(hist[1])
+    p.apply(lambda row: plot_dot_park(row, color = color, edges = edges, map_obj = m) ,axis = 1)
+    
+m.save(os.path.join(parent_path,"clusters.html"))
 
 
 # create the html for over time for the clusters
@@ -378,70 +429,70 @@ for hour in p_work['date'].unique():
 images[0].save(os.path.join(parent_path,'running.gif'),
                save_all=True, append_images=images[1:], optimize=False, duration=500, loop=1)
     
-    
 
-# try to calcualte an rolling average
-# - - - - - - - - - - - - - - - - 
 
-# calculate sum for each time stamp
-t = pd.DataFrame(traffic.groupby(['date'])['PW'].sum()).reset_index()
-p = pd.DataFrame(park.groupby(['date'])[['capacity','free']].sum()).reset_index() 
+# # try to calcualte an rolling average
+# # - - - - - - - - - - - - - - - - 
 
-# select common 
-# intersect time span of two dataframe
-time_intersect = list(set(t['date']).intersection(p['date']))
+# # calculate sum for each time stamp
+# t = pd.DataFrame(traffic.groupby(['date'])['PW'].sum()).reset_index()
+# p = pd.DataFrame(park.groupby(['date'])[['capacity','free']].sum()).reset_index() 
 
-# select common times
-t = t[t['date'].isin(time_intersect)]
-p = p[p['date'].isin(time_intersect)]
+# # select common 
+# # intersect time span of two dataframe
+# time_intersect = list(set(t['date']).intersection(p['date']))
 
-window_size = 168  # change this to adjust window site (hours, thus 168 = 7 days)
-t_rol = t.rolling(window_size, center = True, on ='date', closed = 'both').mean()
-p_rol = p.rolling(window_size, center = True, on ='date', closed = 'both').mean()
+# # select common times
+# t = t[t['date'].isin(time_intersect)]
+# p = p[p['date'].isin(time_intersect)]
 
-# exclude those that ara np.nan
-t_rol.dropna(inplace = True)
-p_rol.dropna(inplace = True)
+# window_size = 168  # change this to adjust window site (hours, thus 168 = 7 days)
+# t_rol = t.rolling(window_size, center = True, on ='date', closed = 'both').mean()
+# p_rol = p.rolling(window_size, center = True, on ='date', closed = 'both').mean()
 
-# calculate utilization
-p_rol['utilization'] = (p_rol['capacity'] - p_rol['free']) / p_rol['capacity']  
+# # exclude those that ara np.nan
+# t_rol.dropna(inplace = True)
+# p_rol.dropna(inplace = True)
 
-# calucate indexed series 
-start_index = min(t_rol['date'])
-end_index = max(t_rol['date'])
-# index of that row 
-t_idx = t_rol.index[t_rol['date'] == start_index][0]
-p_idx = p_rol.index[p_rol['date'] == start_index][0] 
+# # calculate utilization
+# p_rol['utilization'] = (p_rol['capacity'] - p_rol['free']) / p_rol['capacity']  
+
+# # calucate indexed series 
+# start_index = min(t_rol['date'])
+# end_index = max(t_rol['date'])
+# # index of that row 
+# t_idx = t_rol.index[t_rol['date'] == start_index][0]
+# p_idx = p_rol.index[p_rol['date'] == start_index][0] 
                     
-t_rol['index'] = t_rol['PW'] / t_rol.at[t_idx,'PW'] * 100
-p_rol['index'] = p_rol['utilization'] / p_rol.at[p_idx,'utilization'] * 100
+# t_rol['index'] = t_rol['PW'] / t_rol.at[t_idx,'PW'] * 100
+# p_rol['index'] = p_rol['utilization'] / p_rol.at[p_idx,'utilization'] * 100
 
-f = plt.figure()
-f.set_figwidth(20)
-f.set_figheight(10)
-plt.rcParams.update({'font.size': 14})
+# f = plt.figure()
+# f.set_figwidth(20)
+# f.set_figheight(10)
+# plt.rcParams.update({'font.size': 14})
 
-plt.plot(t_rol['date'], t_rol['index'], color = 'tab:orange', label = "Traffic", linewidth=2)
-plt.plot(p_rol['date'], p_rol['index'], color = 'tab:blue', label = "Parking utilization", linewidth=2)
-plt.title('Rolling Average over ' + str(int(window_size/24)) + ' days')
+# plt.plot(t_rol['date'], t_rol['index'], color = 'tab:orange', label = "Traffic", linewidth=2)
+# plt.plot(p_rol['date'], p_rol['index'], color = 'tab:blue', label = "Parking utilization", linewidth=2)
+# plt.title('Rolling Average over ' + str(int(window_size/24)) + ' days')
 
-plt.xlim([start_index, end_index])
+# plt.xlim([start_index, end_index])
 
-plt.xlabel('Time')
-plt.ylabel('Index (' + start_index.strftime('%Y-%m-%d %I%p') + '=100)' )
-plt.legend(loc = 'lower right')
+# plt.xlabel('Time')
+# plt.ylabel('Index (' + start_index.strftime('%Y-%m-%d %I%p') + '=100)' )
+# plt.legend(loc = 'lower right')
 
-# add vertical lines for covid
-x_pos = pd.Timestamp(year=2020, month=3, day = 16, tz='utc')
-plt.axvline(x = x_pos, color = 'tab:red', linestyle='--')
-plt.text(x_pos, 124, 'First Lockdown', color = 'tab:red', backgroundcolor='white')
+# # add vertical lines for covid
+# x_pos = pd.Timestamp(year=2020, month=3, day = 16, tz='utc')
+# plt.axvline(x = x_pos, color = 'tab:red', linestyle='--')
+# plt.text(x_pos, 124, 'First Lockdown', color = 'tab:red', backgroundcolor='white')
 
-x_pos = pd.Timestamp(year=2020, month=10, day = 15, tz='utc')
-plt.axvline(x = x_pos, color = 'tab:red', linestyle='--')
-plt.text(x_pos, 124, 'Second Lockdown', color = 'tab:red', backgroundcolor='white')
+# x_pos = pd.Timestamp(year=2020, month=10, day = 15, tz='utc')
+# plt.axvline(x = x_pos, color = 'tab:red', linestyle='--')
+# plt.text(x_pos, 124, 'Second Lockdown', color = 'tab:red', backgroundcolor='white')
 
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 
 
