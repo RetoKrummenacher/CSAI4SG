@@ -183,8 +183,8 @@ clusters = {'kb' : kb, 'gb' : gb}
 # # path setting for all the scripts
 # sys.path.append(os.path.dirname(__file__))
 # # path setting for all the data
-# parent_path = os.path.join(os.path.dirname(os.path.dirname(__file__)))
-parent_path = 'D://ComputerScience//S5//CSAI4SG//git//project'
+parent_path = os.path.join(os.path.dirname(os.path.dirname(__file__)))
+
 
 # load the date
 traffic_raw = pd.read_table(os.path.join(parent_path,'data','trafficCounts.csv'), sep = ';', encoding = 'utf-8')
